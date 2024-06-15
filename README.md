@@ -46,9 +46,4 @@ Ejecuta el instalador
 ```sh
   task clean
 ```
-## Qtile Intregration
-The `tasks.py` file contains a script that loads the number of each priority tasks into a Qtile widget. Just add this file to `/usr/locale/bin` and use the command
-```sh
-  tasks.py
-```
-Use the `sample_widget.py` to guide on how to create the final widget. Do not change the name of each TextBox or the command must not work.
+
