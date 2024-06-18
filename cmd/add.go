@@ -13,6 +13,12 @@ var addCmd = &cobra.Command{
 	Short: "Agrega un nuevo pendiente, rango de prioridad (1-3)",
 	Long:  "Este comando agrega un nuevo pendiente a la lista",
 	Run: func(cmd *cobra.Command, args []string) {
+
+		if len(args) < 2 {
+			fmt.Println("Especifique una prioridad a su tarea")
+			return
+		}
+
 		var tarea tareas.Tarea
 		tarea.Titulo = args[0]
 		tarea.Completado = false

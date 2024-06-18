@@ -67,12 +67,10 @@ func RemTarea(i int) error {
 	return saveTareas()
 }
 
-func ListTareas() []Tarea {
-	if err := loadTareas(); err != nil {
-		return nil
-	}
+func ListTareas() ([]Tarea, error) {
+	err := loadTareas()
 
-	return tareas
+	return tareas, err
 }
 
 func CompleteTarea(i int) error {
