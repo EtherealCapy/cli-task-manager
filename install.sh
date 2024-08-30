@@ -11,7 +11,7 @@ fi
 
 # Crear el archivo de tareas si no existe
 if [ ! -f "$TASKS_FILE" ]; then
-    echo "[]" > "$TASKS_FILE" && echo "  [*] Archivo de tareas creado correctamente"
+    echo "[]" > "$TASKS_FILE" && echo " [*] Archivo de tareas creado correctamente"
 fi
 
 # Compilar el binario en un directorio temporal
