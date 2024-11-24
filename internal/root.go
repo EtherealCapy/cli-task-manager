@@ -1,4 +1,4 @@
-package cmd
+package internal
 
 import (
 	"fmt"
@@ -9,10 +9,10 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "task",
-	Short: "Esta aplicación te ayuda a gestionar tus pendientes",
-	Long:  "Aplicación contruida en Go para gestionar las pendientes del usuario",
+	Short: "This application is a CLI to manage tasks",
+	Long:  "\n -- CLI app build to improve task management -- ",
 	Run: func(cmd *cobra.Command, args []string) {
-		
+
 	},
 }
 
