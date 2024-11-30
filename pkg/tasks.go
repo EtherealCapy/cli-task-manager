@@ -9,6 +9,11 @@ import (
 var taskFile = os.ExpandEnv("$HOME/.tasks/tasks.json")
 var taskList []models.Task
 
+/*
+Función que añade una tarea al archivo JSON
+
+t: tarea a añadir
+*/
 func AddTarea(t models.Task) error {
 	if err := utils.LoadTasks(taskFile, &taskList); err != nil {
 		return err
@@ -18,6 +23,11 @@ func AddTarea(t models.Task) error {
 	return utils.SaveTasks(taskFile, taskList)
 }
 
+/*
+Función que elimina una tarea del archivo JSON
+
+i: índice de la tarea a eliminar
+*/
 func RemTarea(i int) error {
 	if err := utils.LoadTasks(taskFile, &taskList); err != nil {
 		return err
@@ -30,6 +40,9 @@ func RemTarea(i int) error {
 	return utils.SaveTasks(taskFile, taskList)
 }
 
+/*
+Función que lista las tareas del archivo JSON
+*/
 func ListTareas() []models.Task {
 	if err := utils.LoadTasks(taskFile, &taskList); err != nil {
 		return nil
@@ -38,6 +51,11 @@ func ListTareas() []models.Task {
 	return taskList
 }
 
+/*
+Función que marca una tarea como completada
+
+i: índice de la tarea a completar
+*/
 func CompleteTarea(i int) error {
 	if err := utils.LoadTasks(taskFile, &taskList); err != nil {
 		return err
@@ -50,6 +68,11 @@ func CompleteTarea(i int) error {
 	return os.ErrInvalid
 }
 
+/*
+Función que actualiza la lista de tareas en el archivo JSON
+
+t: lista de tareas a guardar
+*/
 func UpdateTareas(t []models.Task) error {
 	taskList = t
 	return utils.SaveTasks(taskFile, taskList)

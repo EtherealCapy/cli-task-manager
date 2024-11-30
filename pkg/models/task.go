@@ -5,4 +5,5 @@ type Task struct {
 	Priority  int
 	Completed bool
 	Date      string
+	Limit     string
 }

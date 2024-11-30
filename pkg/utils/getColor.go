@@ -2,6 +2,11 @@ package utils
 
 import "github.com/fatih/color"
 
+/*
+Función que devuelve el color correspondiente a la prioridad de la tarea
+
+priority: prioridad de la tarea
+*/
 func GetColorForPriority(priority string) *color.Color {
 	switch priority {
 	case "Low":
@@ -15,6 +20,11 @@ func GetColorForPriority(priority string) *color.Color {
 	}
 }
 
+/*
+Función que devuelve el color correspondiente al estado de la tarea
+
+status: estado de la tarea
+*/
 func GetColorForStatus(status string) *color.Color {
 	switch status {
 	case "Pending":

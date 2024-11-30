@@ -19,10 +19,11 @@ func list() {
 
 	if len(tasks) != 0 {
 		table := tablewriter.NewWriter(os.Stdout)
-		table.SetHeader([]string{"#", "title", "status", "priority", "created at"})
+		table.SetHeader([]string{"id", "title", "status", "priority", "created at", "duedate"})
 
 		for i, task := range tasks {
 			status := "Pending"
+
 			if task.Completed {
 				status = "Completed"
 			}
@@ -32,12 +33,17 @@ func list() {
 			statuscolor := utils.GetColorForStatus(status)
 			prioritycolor := utils.GetColorForPriority(priority)
 
+			if task.Limit == "" {
+				task.Limit = "No duedate"
+			}
+
 			table.Append([]string{
-				fmt.Sprintf("%d", i+1),
+				fmt.Sprintf("%d ", i+1),
 				task.Title,
 				statuscolor.Sprintf(status),
 				prioritycolor.Sprintf(priority),
 				task.Date,
+				task.Limit,
 			})
 		}
 
