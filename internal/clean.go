@@ -9,8 +9,13 @@ import (
 )
 
 func clean() {
-	taskList := pkg.ListTareas()
 	var newTasks []models.Task
+	taskList, err := pkg.ListTareas()
+
+	if err != nil {
+		fmt.Println("Error while loading tasks")
+		return
+	}
 
 	for _, task := range taskList {
 		if !task.Completed {
@@ -18,7 +23,7 @@ func clean() {
 		}
 	}
 
-	err := pkg.UpdateTareas(newTasks)
+	err = pkg.UpdateTareas(newTasks)
 	if err != nil {
 		fmt.Println("Error while updating task list")
 		return

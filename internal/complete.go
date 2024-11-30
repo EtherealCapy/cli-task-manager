@@ -8,20 +8,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func complete(args []string) {
-	i, err := strconv.Atoi(args[0])
-	if err != nil {
-		fmt.Println("Invalid index: ", err)
-		return
-	}
-
-	if err := pkg.CompleteTarea(i); err != nil {
-		fmt.Println("Error while completing: ", err)
-	} else {
-		fmt.Println("Task completed!")
-	}
-}
-
 var completeCmd = &cobra.Command{
 	Use:   "complete [ Index ]",
 	Short: "Mark as coompleted a task by its index",
@@ -33,4 +19,19 @@ var completeCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(completeCmd)
+}
+
+func complete(args []string) {
+	i, err := strconv.Atoi(args[0])
+	if err != nil {
+		fmt.Println("Invalid index, try with a valid one")
+		return
+	}
+
+	if err := pkg.CompleteTarea(i - 1); err != nil {
+		fmt.Println("Error while completing: ", err)
+	} else {
+		fmt.Println("Task completed!")
+
+	}
 }

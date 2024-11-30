@@ -10,9 +10,23 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var listCmd = &cobra.Command{
+	Use:   "list",
+	Short: "List all taks",
+	Long:  "List all the tasks saved in ~/.tasks/tasks.json",
+	Run: func(cmd *cobra.Command, args []string) {
+		list()
+	},
+}
+
+func init() {
+	rootCmd.AddCommand(listCmd)
+}
+
 func list() {
-	tasks := pkg.ListTareas()
-	if tasks == nil {
+	tasks, err := pkg.ListTareas()
+
+	if err != nil {
 		fmt.Println("Error while loading tasks")
 		return
 	}
@@ -53,17 +67,4 @@ func list() {
 		fmt.Println(" [!] No pending tasks")
 		fmt.Println("\t")
 	}
-}
-
-var listCmd = &cobra.Command{
-	Use:   "list",
-	Short: "List all taks",
-	Long:  "List all the tasks saved in ~/.tasks/tasks.json",
-	Run: func(cmd *cobra.Command, args []string) {
-		list()
-	},
-}
-
-func init() {
-	rootCmd.AddCommand(listCmd)
 }

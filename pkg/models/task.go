@@ -1,9 +1,11 @@
 package models
 
 type Task struct {
-	Title     string
-	Priority  int
-	Completed bool
-	Date      string
-	Limit     string
+	Title      string
+	Priority   int
+	Completed  bool
+	CompleteAt string
+	Date       string
+	Limit      string
+	ActiveDays int
 }
