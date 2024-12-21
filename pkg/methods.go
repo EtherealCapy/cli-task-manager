@@ -158,3 +158,24 @@ func UpdateTareas(t []models.Task) error {
 
 	return nil
 }
+
+/*
+Función que varia el estado de una tarea
+
+i: índice de la tarea a variar
+*/
+func ToggleTarea(i int) error {
+
+	if err := utils.LoadTasks(taskFile, &taskList); err != nil {
+		return err
+	}
+
+	if i < 0 || i >= len(taskList) {
+		return errors.New("Index out of range")
+	}
+
+	task := &taskList[i]
+	task.Completed = !task.Completed
+
+	return utils.SaveTasks(taskFile, taskList)
+}

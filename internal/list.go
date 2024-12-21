@@ -33,7 +33,7 @@ func list() {
 
 	if len(tasks) != 0 {
 		table := tablewriter.NewWriter(os.Stdout)
-		table.SetHeader([]string{"id", "title", "status", "priority", "created at", "duedate"})
+		table.SetHeader([]string{"#", "title", "status", "priority", "created at", "duedate"})
 
 		for i, task := range tasks {
 			status := "Pending"
