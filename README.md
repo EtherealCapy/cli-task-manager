@@ -1,7 +1,7 @@
 # Task Manager (CLI)
 
 ## Overview
-This task management application is a command-line tool designed to help you manage your tasks efficiently from the terminal. This tool allows you to add, delete, list, and complete tasks, as well as clean up completed tasks.
+This task management application is a command-line tool designed to help you manage your tasks efficiently from the terminal.
 
 ## Features
 - **Add Task**: Adds a new task with a specified priority.
