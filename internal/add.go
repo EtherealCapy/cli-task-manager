@@ -98,8 +98,7 @@ func addDuedate(date string, task *models.Task) error {
 Función que comprueba el formato de la fecha
 */
 func checkDateFormat(date string) bool {
-	_, err := time.Parse("2006-01-02", date)
-	if err != nil {
+	if _, err := time.Parse("2006-01-02", date); err != nil {
 		return false
 	}
 	return true

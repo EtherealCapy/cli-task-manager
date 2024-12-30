@@ -54,8 +54,8 @@ func list() {
 			table.Append([]string{
 				fmt.Sprintf("%d ", i+1),
 				task.Title,
-				statuscolor.Sprintf(status),
-				prioritycolor.Sprintf(priority),
+				statuscolor.Sprintf("%s", status),
+				prioritycolor.Sprintf("%s", priority),
 				task.Date,
 				task.Limit,
 			})

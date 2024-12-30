@@ -15,7 +15,7 @@ Función que devuelve la posición de memoria de una tarea
 
 i: índice de la tarea a recuperar
 */
-func getTarea(i int) (*models.Task, error) {
+func GetTarea(i int) (*models.Task, error) {
 	var err error
 
 	if err = utils.LoadTasks(taskFile, &taskList); err != nil {
@@ -101,13 +101,13 @@ func CompleteTarea(i int) error {
 	}
 
 	if i < 0 || i >= len(taskList) {
-		return errors.New("Task index out of range")
+		return errors.New("task index out of range")
 	}
 
 	taskList[i].Completed = true
 
 	if err := utils.SaveTasks(taskFile, taskList); err != nil {
-		return errors.New("Failed to save tasks")
+		return errors.New("failed to save tasks")
 	}
 
 	return nil
@@ -117,28 +117,32 @@ func CompleteTarea(i int) error {
 Función que actualiza los días activos
 
 i: índice de la tarea a actualizar
+days: días activos
 */
 func UpdateActiveDays(i int, days int) error {
 	var err error
 
 	if days < 0 {
-		err = errors.New("Days cannot be negative")
+		err = errors.New("days cannot be negative")
 		return err
 	}
 
 	if err = utils.LoadTasks(taskFile, &taskList); err != nil {
-		err = errors.New("Failed to load tasks")
+		err = errors.New("failed to load tasks")
+		return err
 	}
 
 	if i < 0 || i >= len(taskList) {
-		err = errors.New("Invalid task index")
+		err = errors.New("invalid task index")
+		return err
 	}
 
 	task := &taskList[i]
 	task.ActiveDays = days
 
 	if err := utils.SaveTasks(taskFile, taskList); err != nil {
-		err = errors.New("Failed to save tasks")
+		err = errors.New("failed to save tasks")
+		return err
 	}
 
 	return nil
@@ -153,7 +157,7 @@ func UpdateTareas(t []models.Task) error {
 	taskList = t
 
 	if err := utils.SaveTasks(taskFile, taskList); err != nil {
-		return errors.New("Failed to save tasks")
+		return errors.New("failed to save tasks")
 	}
 
 	return nil
@@ -171,7 +175,7 @@ func ToggleTarea(i int) error {
 	}
 
 	if i < 0 || i >= len(taskList) {
-		return errors.New("Index out of range")
+		return errors.New("index out of range")
 	}
 
 	task := &taskList[i]
