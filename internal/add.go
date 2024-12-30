@@ -35,17 +35,31 @@ func add(cmd *cobra.Command, args []string) {
 		return
 	}
 
-	task.Title = args[0]
-	task.Completed = false
-	task.Date = time.Now().Format("Mon, 02 Jan 2006")
-	priority, errConv := strconv.Atoi(args[1])
-	duedate, _ := cmd.Flags().GetString("limit")
+	const (
+		MinPriority = 1
+		MaxPriority = 3
+	)
 
-	if errConv != nil {
-		fmt.Println(" [!] Wrong priority format. Must be a number between 1 and 3")
+	priority, errConv := strconv.Atoi(args[1])
+	if errConv != nil || priority < MinPriority || priority > MaxPriority {
+		fmt.Printf(" [!] Priority must be a number between %d and %d\n", MinPriority, MaxPriority)
 		return
 	}
 
+	duedate, err := cmd.Flags().GetString("limit")
+	if err != nil {
+		fmt.Println(" [!] Error getting due date:", err)
+		return
+	}
+
+	task = models.Task{
+		Title:     args[0],
+		Completed: false,
+		Date:      time.Now().Format("Mon, 02 Jan 2006"),
+		Priority:  priority,
+		Limit:     duedate,
+	}
+	
 	if priority < 1 || priority > 3 {
 		fmt.Println(" [!] Wrong priority range")
 		return
