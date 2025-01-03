@@ -10,9 +10,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var countPending bool
+var countTotal bool
+
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "List all taks",
+	Short: "List all tasks",
 	Long:  "List all the tasks saved in ~/.tasks/tasks.json",
 	Run: func(cmd *cobra.Command, args []string) {
 		list()
@@ -21,6 +24,8 @@ var listCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(listCmd)
+	listCmd.Flags().BoolVarP(&countPending, "count", "c", false, "Count the number of pending tasks")
+	listCmd.Flags().BoolVarP(&countTotal, "count-total", "t", false, "Count the total number of tasks")
 }
 
 func list() {
@@ -28,6 +33,22 @@ func list() {
 
 	if err != nil {
 		fmt.Println("Error while loading tasks")
+		return
+	}
+
+	if countPending {
+		count := 0
+		for _, task := range tasks {
+			if !task.Completed {
+				count++
+			}
+		}
+		fmt.Printf("Number of pending tasks: %d\n", count)
+		return
+	}
+
+	if countTotal {
+		fmt.Printf("Total number of tasks: %d\n", len(tasks))
 		return
 	}
 

@@ -11,7 +11,7 @@ import (
 Función que carga las tareas desde un archivo JSON
 
 taskFile: nombre del archivo JSON
-tasks: puntero a un slice de tareas
+tasks: posición de memoria de un slice de tareas
 */
 func LoadTasks(taskFile string, tasks *[]models.Task) error {
 	file, err := os.Open(taskFile)
@@ -19,13 +19,13 @@ func LoadTasks(taskFile string, tasks *[]models.Task) error {
 		if os.IsNotExist(err) {
 			return nil
 		}
-		return fmt.Errorf("Error while trying to open file: %v", err)
+		return fmt.Errorf("error while trying to open file: %v", err)
 	}
 	defer file.Close()
 
 	err = json.NewDecoder(file).Decode(&tasks)
 	if err != nil {
-		return fmt.Errorf("Error while encoding JSON: %v", err)
+		return fmt.Errorf("error while encoding JSON: %v", err)
 	}
 
 	return nil
